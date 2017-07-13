@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<bookstore xmlns="Books.xsd">
+<bookstore xmlns="http://mynameisdharma.sh" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://mynameisdharma.sh C:\Users\abhay\Documents\VisualStudio2015\Projects\PluralSight\SpecName\SpecName\Books.xsd">
 
 <book category="children">
   <title lang="en">Everyday Italian</title>

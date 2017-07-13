@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace SpecName
 {
@@ -13,21 +14,24 @@ namespace SpecName
         {
             XmlDocument xd = new XmlDocument();
             xd.Load("Books.xml");
-
-            XmlNodeList nodelist = xd.SelectNodes("//book[title='Harry Potter']");
+            XmlNamespaceManager ns = new XmlNamespaceManager(xd.NameTable);
+            ns.AddNamespace("x", "http://mynameisdharma.sh");
+            XmlNodeList nodelist = xd.SelectNodes("//x:book[x:title='Harry Potter']",ns);
 
             foreach (XmlNode node in nodelist)
             {
                 try
                 {
-                    string title = node.SelectSingleNode("title").InnerText;
-                    string author = node.SelectSingleNode("author").InnerText;
-                    string price = node.SelectSingleNode("price").InnerText;
-                    Console.WriteLine("Title: " + title);
-                    Console.WriteLine("Author: " + author);
-                    Console.WriteLine("Price: " + price);
+
+                    Console.WriteLine(node.Attributes["category"].Value);
+                    ////string title = node.SelectSingleNode("x:title").InnerText;
+                    //string author = node.SelectSingleNode("/x:author").InnerText;
+                    //string price = node.SelectSingleNode("//x:price").InnerText;
+                    ////Console.WriteLine("Title: " + title);
+                    //Console.WriteLine("Author: " + author);
+                    //Console.WriteLine("Price: " + price);
                 }
-                catch (Exception e)
+                catch (XPathException e)
                 {
                     Console.WriteLine("Error in reading XML");
 
